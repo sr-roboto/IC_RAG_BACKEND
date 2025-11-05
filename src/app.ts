@@ -7,8 +7,13 @@ export class App {
     this.instance = instance;
   }
 
+  public getInstance(): FastifyInstance {
+    return this.instance;
+  }
+
   public async start(port: number, host: string): Promise<void> {
     try {
+      this.instance.ready();
       await this.instance.listen({ port, host });
       this.instance.log.info(`Starting server on http://localhost:${port}`);
     } catch (err) {
